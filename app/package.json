@@ -1,0 +1,31 @@
+{
+  "name": "docxpresgre",
+  "version": "1.0.0",
+  "description": "",
+  "author": "Kai-Mikael Alanne",
+  "license": "MIT",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "lint": "./node_modules/.bin/eslint ./**/*.js",
+    "test": "node test/*.js"
+  },
+  "dependencies": {
+    "express": "^4.14.1"
+  },
+  "devDependencies": {
+    "eslint": "^3.15.0",
+    "eslint-config-airbnb-base": "^11.1.0",
+    "eslint-plugin-import": "^2.2.0",
+    "supertest": "^3.0.0",
+    "tape": "^4.6.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kmalanne/docxpresgre.git"
+  },
+  "homepage": "https://github.com/kmalanne/docxpresgre#readme",
+  "bugs": {
+    "url": "https://github.com/kmalanne/docxpresgre/issues"
+  }
+}
