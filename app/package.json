@@ -22,7 +22,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kmalanne/docxpresgre.git"
+    "url": "git@github.com:kmalanne/docxpresgre.git"
   },
   "homepage": "https://github.com/kmalanne/docxpresgre#readme",
   "bugs": {
