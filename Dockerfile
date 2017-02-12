@@ -1,6 +1,6 @@
 FROM node:latest
 RUN mkdir /app
-ADD app/ /app/
+COPY app/ /app/
 WORKDIR /app
 RUN npm i
 EXPOSE 3000

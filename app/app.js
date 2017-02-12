@@ -1,9 +1,12 @@
 const express = require('express');
 
+const router = express.Router();
 const app = express();
+const port = process.env.PORT || 3000;
 
-app.get('/', (req, res) => res.send('App running...'));
+router.get('/', (req, res) => res.send('App running...'));
+app.use('/', router);
 
-app.listen(3000, () => console.log('Express server running in port 3000'));
+app.listen(port, () => console.log('Express server running in port 3000'));
 
 module.exports = app;
