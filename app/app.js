@@ -1,11 +1,15 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 
-const router = express.Router();
 const app = express();
 const port = process.env.PORT || 3000;
 
-router.get('/', (req, res) => res.send('App running...'));
-app.use('/', router);
+app.use(bodyParser.urlencoded({
+  extended: true,
+}));
+app.use(bodyParser.json());
+
+app.use(require('./routes'));
 
 app.listen(port, () => console.log('Express server running in port 3000'));
 

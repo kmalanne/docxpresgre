@@ -6,17 +6,27 @@
   "license": "MIT",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "nodemon app/app.js",
     "lint": "./node_modules/.bin/eslint ./**/*.js",
-    "test": "node test/*.js"
+    "test": "node app/test/*.js"
   },
+  "keywords": [
+    "node",
+    "express",
+    "postgres",
+    "docker"
+  ],
   "dependencies": {
-    "express": "^4.14.1"
+    "body-parser": "^1.16.1",
+    "express": "^4.14.1",
+    "knex": "^0.12.6",
+    "pg": "^6.1.2"
   },
   "devDependencies": {
     "eslint": "^3.15.0",
     "eslint-config-airbnb-base": "^11.1.0",
     "eslint-plugin-import": "^2.2.0",
+    "nodemon": "^1.11.0",
     "supertest": "^3.0.0",
     "tape": "^4.6.3"
   },
