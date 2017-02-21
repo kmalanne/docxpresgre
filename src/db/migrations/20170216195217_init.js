@@ -1,7 +1,7 @@
 
 exports.up = (knex, Promise) =>
   Promise.all([
-    knex.schema.createTable('test', (table) => {
+    knex.schema.createTable('table', (table) => {
       table.increments('id').primary();
       table.string('column_1');
       table.integer('column_2');
@@ -11,5 +11,5 @@ exports.up = (knex, Promise) =>
 
 exports.down = (knex, Promise) =>
   Promise.all([
-    knex.schema.dropTable('test'),
+    knex.schema.dropTable('table'),
   ]);

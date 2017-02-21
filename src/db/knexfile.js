@@ -1,7 +1,7 @@
 module.exports = {
   development: {
     client: 'pg',
-    connection: 'postgres://test:test@localhost:5432/test_db',
+    connection: 'postgres://pg_user:pgpassword@127.0.0.1:5432/pg_db',
   },
   migrations: {
     directory: './migrations',

@@ -1,0 +1,3 @@
+CREATE USER pg_user WITH PASSWORD 'pgpassword';
+CREATE DATABASE pg_db;
+GRANT ALL PRIVILEGES ON DATABASE pg_db to pg_user;
