@@ -1,8 +1,8 @@
 const supertest = require('supertest');
 const test = require('tape');
-const app = require('../../server');
+const server = require('../../server').server;
 
-const api = supertest(app);
+const api = supertest(server);
 
 test('GET /', (t) => {
   api
