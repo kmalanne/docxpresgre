@@ -10,7 +10,7 @@ First you need to install Docker from Docker's official [website](https://www.do
 
 Once Docker is installed run:
 
-`docker-compose up` Build docker images and start Express and Postgres containers
-`npm run db_up` Run migrations and seed data to local database
+* `docker-compose up` Build docker images and start Express and Postgres containers
+* `npm run db_up` Run migrations and seed data to local database
 
 Server runs at http://localhost:3000
