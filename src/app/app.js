@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const router = express.Router();
 
 const indexRoute = require('./routes/index');
+const routeRoute = require('./routes/route');
 
 module.exports = () => {
   const app = express();
@@ -15,6 +16,7 @@ module.exports = () => {
 
   app.use('/api/v1', router);
   indexRoute(router);
+  routeRoute(router);
 
   return app;
 };

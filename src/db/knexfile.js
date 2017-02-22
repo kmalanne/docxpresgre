@@ -1,8 +1,6 @@
 const dbConfiguration = {
-  development: {
-    client: 'pg',
-    connection: 'postgres://pg_user:pgpassword@127.0.0.1:5432/pg_db',
-  },
+  client: 'pg',
+  connection: 'postgres://pg_user:pgpassword@127.0.0.1:5432/pg_db',
   migrations: {
     directory: './migrations',
   },
