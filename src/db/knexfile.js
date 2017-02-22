@@ -1,4 +1,4 @@
-module.exports = {
+const dbConfiguration = {
   development: {
     client: 'pg',
     connection: 'postgres://pg_user:pgpassword@127.0.0.1:5432/pg_db',
@@ -9,4 +9,10 @@ module.exports = {
   seeds: {
     directory: './seeds',
   },
+};
+
+module.exports = {
+  development: dbConfiguration,
+  test: dbConfiguration,
+  production: dbConfiguration,
 };
