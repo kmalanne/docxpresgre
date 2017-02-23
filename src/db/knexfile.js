@@ -2,10 +2,10 @@ const dbConfiguration = {
   client: 'pg',
   connection: 'postgres://pg_user:pgpassword@127.0.0.1:5432/pg_db',
   migrations: {
-    directory: './db/migrations',
+    directory: './src/db/migrations',
   },
   seeds: {
-    directory: './db/seeds',
+    directory: './src/db/seeds',
   },
 };
 
