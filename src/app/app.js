@@ -3,8 +3,8 @@ const bodyParser = require('body-parser');
 
 const router = express.Router();
 
-const indexRoute = require('./routes/index');
-const routeRoute = require('./routes/route');
+const index = require('./routes/index');
+const example = require('./routes/example');
 
 module.exports = () => {
   const app = express();
@@ -14,9 +14,8 @@ module.exports = () => {
   }));
   app.use(bodyParser.json());
 
-  app.use('/api/v1', router);
-  indexRoute(router);
-  routeRoute(router);
+  app.use('/', index);
+  app.use('/example', example);
 
   return app;
 };
