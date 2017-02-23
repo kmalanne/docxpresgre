@@ -1,3 +1,3 @@
-CREATE USER db_user WITH PASSWORD 'dbpassword';
-CREATE DATABASE test_db;
-GRANT ALL PRIVILEGES ON DATABASE test_db to db_user;
+CREATE USER postgres WITH PASSWORD 'postgres';
+CREATE DATABASE postgres;
+GRANT ALL PRIVILEGES ON DATABASE postgres to postgres;

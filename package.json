@@ -1,7 +1,7 @@
 {
   "name": "docxpresgre",
   "version": "1.0.0",
-  "description": "",
+  "description": "Starter for Express/Postgres API using Docker containers",
   "author": "Kai-Mikael Alanne",
   "license": "MIT",
   "main": "server.js",

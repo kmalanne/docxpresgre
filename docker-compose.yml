@@ -2,7 +2,7 @@ version: '2'
 services:
   app:
     build: .
-    depends_on:
+    links:
       - postgres
     ports:
       - '3000:3000'
@@ -10,8 +10,9 @@ services:
       - '.:/app'
   postgres:
     image: postgres:latest
-    restart: always
     ports:
       - '5432:5432'
-    volumes:
-      - './src/db/tools:/docker-entrypoint-initdb.d'
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres

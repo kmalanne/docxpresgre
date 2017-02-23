@@ -1,8 +1,10 @@
 const path = require('path');
 
+const host = process.env.NODE_ENV === 'test' ? '127.0.0.1' : 'postgres';
+
 const dbConfiguration = {
   client: 'pg',
-  connection: 'postgres://db_user:dbpassword@127.0.0.1:5432/test_db',
+  connection: `postgres://postgres:postgres@${host}:5432/postgres`,
   migrations: {
     directory: path.join(__dirname, '/migrations'),
   },
