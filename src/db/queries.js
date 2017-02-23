@@ -1,7 +1,7 @@
-const db = require('./db.js');
+const knex = require('./db.js');
 
 function getAll() {
-  return db.raw('SELECT * FROM table');
+  return knex.raw('SELECT * FROM table');
 }
 
 module.exports = {

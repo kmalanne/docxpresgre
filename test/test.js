@@ -2,6 +2,7 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const server = require('../src/server').server;
+const knex = require('../src/db/db.js');
 
 const should = chai.should();
 
