@@ -7,11 +7,11 @@ services:
     ports:
       - '3000:3000'
     volumes:
-      - './src:/app'
+      - '.:/app'
   postgres:
     image: postgres:latest
     restart: always
     ports:
       - '5432:5432'
     volumes:
-      - '.src/db/tools:/docker-entrypoint-initdb.d'
+      - './src/db/tools:/docker-entrypoint-initdb.d'
