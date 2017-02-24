@@ -9,9 +9,8 @@ before_script:
   - psql -f ./src/db/tools/init_db.sql -U postgres
   - npm install
 script:
-  - npm run db_up
   - npm run lint
-  - npm run test
+  - npm run test-ci
 notifications:
   email:
     - kaimikael.alanne@icloud.com

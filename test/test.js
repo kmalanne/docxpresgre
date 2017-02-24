@@ -1,5 +1,3 @@
-process.env.NODE_ENV = 'test';
-
 /* eslint-disable */
 const chai = require('chai');
 const chaiHttp = require('chai-http');
