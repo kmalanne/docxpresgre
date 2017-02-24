@@ -2,7 +2,7 @@
 
 # docxpresgre 
 
-Docxpresgre is a boilerplate for Docker based Express backend app using Postgres database. By running Docker containers developer can easily start up backend server and database without extra configuration and focuse on developing actual program.
+Docxpresgre is a boilerplate for Docker based Express backend app using Postgres database. By running Docker containers developer can easily start up backend server and database without extra configuration and focus on developing the actual backend.
 
 ## Get started
 
