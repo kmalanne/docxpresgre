@@ -53,13 +53,8 @@ describe('API', () => {
         .end((err, res) => {
           res.should.have.status(200);
           res.should.be.json;
-          // res.body.should.be.a('array');
-          // res.body.length.should.equal(4);
-          // res.body[0].should.have.property('id');
-          // res.body[0].should.have.property('column_1');
-          // res.body[0].column_1.should.equal('value1');
-          // res.body[0].should.have.property('column_2');
-          // res.body[0].column_2.should.equal(1);
+          res.body.should.have.property('rows');
+          res.body.rows.length.should.equal(3);
           done();
         });
     });

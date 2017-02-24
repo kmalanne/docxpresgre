@@ -1,5 +1,6 @@
 const path = require('path');
 
+// Running migrations from CLI or Travis => localhost
 const host = process.env.NODE_ENV === 'test' ? '127.0.0.1' : 'postgres';
 
 const dbConfiguration = {
