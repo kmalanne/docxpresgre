@@ -140,7 +140,7 @@ describe('API', () => {
   });
 
   describe('DELETE /example/:id', () => {
-    it('should delete an single example', (done) => {
+    it('should delete a single example', (done) => {
       chai.request(server)
         .delete('/example/1')
         .end((error, response) => {
