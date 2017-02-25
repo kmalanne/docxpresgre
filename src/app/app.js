@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 
 const index = require('./routes/index');
 const example = require('./routes/example');
+const error = require('./routes/error');
 
 module.exports = () => {
   const app = express();
@@ -14,6 +15,7 @@ module.exports = () => {
 
   app.use('/', index);
   app.use('/example', example);
+  app.use(error);
 
   return app;
 };
