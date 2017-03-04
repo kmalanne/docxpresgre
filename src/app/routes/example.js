@@ -30,7 +30,7 @@ router.put('/:id', (req, res, next) => {
     });
   }
 
-  return queries.update(req.params.id, req.body)
+  return queries.updateExample(req.params.id, req.body)
     .then(() => queries.getExampleById(req.params.id))
     .then(result => res.status(200).json(result))
     .catch(error => next(error));
