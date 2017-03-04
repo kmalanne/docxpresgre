@@ -5,20 +5,20 @@ const queries = require('../../db/queries');
 const router = express.Router();
 
 router.get('/', (req, res, next) => {
-  queries.getAll()
+  queries.getAllExample()
     .then(result => res.status(200).json(result))
     .catch(error => next(error));
 });
 
 router.get('/:id', (req, res, next) => {
-  queries.getById(req.params.id)
+  queries.getExampleById(req.params.id)
     .then(result => res.status(200).json(result))
     .catch(error => next(error));
 });
 
 router.post('/', (req, res, next) => {
-  queries.add(req.body)
-    .then(id => queries.getById(id))
+  queries.addExample(req.body)
+    .then(id => queries.getExampleById(id))
     .then(result => res.status(200).json(result))
     .catch(error => next(error));
 });
@@ -31,13 +31,13 @@ router.put('/:id', (req, res, next) => {
   }
 
   return queries.update(req.params.id, req.body)
-    .then(() => queries.getById(req.params.id))
+    .then(() => queries.getExampleById(req.params.id))
     .then(result => res.status(200).json(result))
     .catch(error => next(error));
 });
 
 router.delete('/:id', (req, res, next) => {
-  queries.deleteItem(req.params.id)
+  queries.deleteExample(req.params.id)
     .then(result => res.status(200).json(result))
     .catch(error => next(error));
 });

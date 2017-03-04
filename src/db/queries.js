@@ -4,30 +4,38 @@ function parseId(id) {
   return parseInt(id, 10);
 }
 
-function getAll() {
+// Example
+function getAllExample() {
   return knex.raw('SELECT * FROM example ORDER BY id ASC');
 }
 
-function getById(id) {
+function getExampleById(id) {
   return knex.raw('SELECT * FROM example WHERE id = ?', [parseId(id)]);
 }
 
-function add(example) {
+function addExample(example) {
   return knex('example').insert(example, 'id');
 }
 
-function update(id, updates) {
+function updateExample(id, updates) {
   return knex('example').where('id', parseId(id)).update(updates);
 }
 
-function deleteItem(id) {
+function deleteExample(id) {
   return knex('example').where('id', parseId(id)).del();
 }
 
+// User
+function getUserById(id) {
+  return knex.raw('SELECT * FROM user WHERE id = ?', [parseId(id)]);
+}
+
 module.exports = {
-  getAll,
-  getById,
-  add,
-  update,
-  deleteItem,
+  getAllExample,
+  getExampleById,
+  addExample,
+  updateExample,
+  deleteExample,
+
+  getUserById,
 };
