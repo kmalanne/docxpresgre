@@ -5,12 +5,13 @@ exports.up = (knex, Promise) =>
       example.increments('id').primary();
       example.string('column_1');
       example.integer('column_2');
-      example.timestamp('created_at').defaultTo(knex.fn.now());
+      example.timestamp('created_at').notNullable().defaultTo(knex.fn.now());
     }),
 
-    knex.schema.createTable('user', (user) => {
+    knex.schema.createTable('app_user', (user) => {
       user.increments('id').primary();
-      user.string('username').unique().notNullable();
+      user.integer('oauth_id').unique().notNullable();
+      user.string('name').unique().notNullable();
       user.timestamp('created_at').notNullable().defaultTo(knex.fn.now());
     }),
   ]);
@@ -18,5 +19,5 @@ exports.up = (knex, Promise) =>
 exports.down = (knex, Promise) =>
   Promise.all([
     knex.schema.dropTable('example'),
-    knex.schema.dropTable('user'),
+    knex.schema.dropTable('app_user'),
   ]);

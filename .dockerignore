@@ -2,6 +2,9 @@
 .gitignore
 .env
 .vscode
+./src/app/config/auth.js
+*.log
+remove_docker.sh
 README.md
 docker-compose.yml
 node_modules/

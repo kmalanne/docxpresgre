@@ -27,7 +27,15 @@ function deleteExample(id) {
 
 // User
 function getUserById(id) {
-  return knex.raw('SELECT * FROM user WHERE id = ?', [parseId(id)]);
+  return knex.raw('SELECT * FROM app_user WHERE id = ?', [parseId(id)]);
+}
+
+function getUserByOAuthID(id) {
+  return knex.raw('SELECT * FROM app_user WHERE oauth_id = ?', [parseId(id)]);
+}
+
+function addUser(user) {
+  return knex('app_user').insert(user, 'id');
 }
 
 module.exports = {
@@ -38,4 +46,6 @@ module.exports = {
   deleteExample,
 
   getUserById,
+  getUserByOAuthID,
+  addUser,
 };

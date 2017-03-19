@@ -1,5 +1,7 @@
-node_modules/
-*.log
 .env
 .vscode
+./src/app/config/auth.js
+.vscode
+*.log
 remove_docker.sh
+node_modules/

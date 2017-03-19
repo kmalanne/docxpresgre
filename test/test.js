@@ -2,7 +2,8 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const server = require('../src/server').server;
-const knex = require('../src/db/db.js');
+const knex = require('../src/db/db');
+const queries = require('../src/db/queries');
 
 const should = chai.should();
 
@@ -39,8 +40,19 @@ describe('API', () => {
       chai.request(server)
         .get('/scam')
         .end((err, res) => {
-          res.should.have.status(500);
+          res.should.have.status(404);
           res.should.be.html;
+          done();
+        });
+    });
+  });
+
+  describe('GET /unavailable', () => {
+    it('should return unauthorized', (done) => {
+      chai.request(server)
+        .get('/unavailable')
+        .end((err, res) => {
+          res.should.have.status(401);
           done();
         });
     });
