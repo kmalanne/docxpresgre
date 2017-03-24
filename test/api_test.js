@@ -3,14 +3,12 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const server = require('../src/server').server;
 const knex = require('../src/db/db');
-const queries = require('../src/db/queries');
 
 const should = chai.should();
 
 chai.use(chaiHttp);
 
 describe('API', () => {
-
   beforeEach((done) => {
     knex.migrate.rollback()
       .then(() => knex.migrate.latest())
@@ -65,13 +63,6 @@ describe('API', () => {
         .end((err, res) => {
           res.should.have.status(200);
           res.should.be.json;
-          res.body.should.have.property('rows');
-          res.body.rows.should.be.a('array')
-          res.body.rows.length.should.equal(3);
-          res.body.rows[1].should.be.a('object');
-          res.body.rows[1].should.have.property('id');
-          res.body.rows[1].should.have.property('column_1');
-          res.body.rows[1].should.have.property('column_2');
           done();
         });
     });
@@ -84,16 +75,15 @@ describe('API', () => {
         .end((err, res) => {
           res.should.have.status(200);
           res.should.be.json;
-          res.body.should.have.property('rows');
-          res.body.rows.should.be.a('array')
-          res.body.rows.length.should.equal(1);
-          res.body.rows[0].should.be.a('object');
-          res.body.rows[0].should.have.property('id');
-          res.body.rows[0].id.should.equal(1);
-          res.body.rows[0].should.have.property('column_1');
-          res.body.rows[0].column_1.should.equal('value1');
-          res.body.rows[0].should.have.property('column_2');
-          res.body.rows[0].column_2.should.equal(1);
+          done();
+        });
+    });
+
+     it('should return bad request with invalid id', (done) => {
+      chai.request(server)
+        .get('/example/scam')
+        .end((err, res) => {
+          res.should.have.status(400);
           done();
         });
     });
@@ -110,16 +100,19 @@ describe('API', () => {
         .end((err, res) => {
           res.should.have.status(200);
           res.should.be.json;
-          res.body.should.have.property('rows');
-          res.body.rows.should.be.a('array')
-          res.body.rows.length.should.equal(1);
-          res.body.rows[0].should.be.a('object');
-          res.body.rows[0].should.have.property('id');
-          res.body.rows[0].id.should.equal(4);
-          res.body.rows[0].should.have.property('column_1');
-          res.body.rows[0].column_1.should.equal('value4');
-          res.body.rows[0].should.have.property('column_2');
-          res.body.rows[0].column_2.should.equal(4);
+          done();
+        });
+    });
+
+    it('should return bad request with invalid body', (done) => {
+      chai.request(server)
+        .post('/example')
+        .send({
+          column_1: 12345,
+          column_2: "scam",
+        })
+        .end((err, res) => {
+          res.should.have.status(400);
           done();
         });
     });
@@ -136,16 +129,32 @@ describe('API', () => {
         .end((err, res) => {
           res.should.have.status(200);
           res.should.be.json;
-          res.body.should.have.property('rows');
-          res.body.rows.should.be.a('array')
-          res.body.rows.length.should.equal(1);
-          res.body.rows[0].should.be.a('object');
-          res.body.rows[0].should.have.property('id');
-          res.body.rows[0].id.should.equal(1);
-          res.body.rows[0].should.have.property('column_1');
-          res.body.rows[0].column_1.should.equal('value5');
-          res.body.rows[0].should.have.property('column_2');
-          res.body.rows[0].column_2.should.equal(5);
+          done();
+        });
+    });
+
+    it('should return bad request with invalid id', (done) => {
+      chai.request(server)
+        .put('/example/scamelot')
+        .send({
+          column_1: 'value',
+          column_2: 10,
+        })
+        .end((err, res) => {
+          res.should.have.status(400);
+          done();
+        });
+    });
+
+    it('should return bad request with invalid body', (done) => {
+      chai.request(server)
+        .put('/example/1')
+        .send({
+          column_1: 666,
+          column_2: 'ballsballsballs',
+        })
+        .end((err, res) => {
+          res.should.have.status(400);
           done();
         });
     });
@@ -157,16 +166,16 @@ describe('API', () => {
         .delete('/example/1')
         .end((error, response) => {
           response.should.have.status(200);
-          chai.request(server)
-            .get('/example')
-            .end((err, res) => {
-              res.should.have.status(200);
-              res.should.be.json;
-              res.body.should.have.property('rows');
-              res.body.rows.should.be.a('array')
-              res.body.rows.length.should.equal(2);
-              done();
-            });
+          done();
+        });
+    });
+
+    it('should return bad request with invalid id', (done) => {
+      chai.request(server)
+        .delete('/example/"#€%€#')
+        .end((error, response) => {
+          response.should.have.status(400);
+          done();
         });
     });
   });

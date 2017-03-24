@@ -4,6 +4,7 @@
 .vscode
 ./src/app/config/auth.js
 *.log
+data
 remove_docker.sh
 README.md
 docker-compose.yml

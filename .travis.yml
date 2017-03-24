@@ -11,6 +11,3 @@ before_script:
 script:
   - npm run lint
   - npm run test
-notifications:
-  email:
-    - kaimikael.alanne@icloud.com

@@ -3,13 +3,13 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const session = require('express-session');
 
-require('./config/passport.js')(passport);
-
 const index = require('./routes/index');
 const auth = require('./routes/auth');
 const example = require('./routes/example');
 const unavailable = require('./routes/unavailable');
 const error = require('./routes/error');
+
+require('./config/passport.js')(passport);
 
 module.exports = () => {
   const app = express();
@@ -20,7 +20,7 @@ module.exports = () => {
   app.use(bodyParser.json());
 
   app.use(session({
-    secret: 'yolo', // process.env.SECRET_KEY
+    secret: 'yoloswag',
     resave: false,
     saveUninitialized: false,
   }));

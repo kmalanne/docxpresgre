@@ -1,6 +1,6 @@
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const config = require('./auth');
-const queries = require('../../db/queries');
+const User = require('../../db/models/user');
 
 module.exports = (passport) => {
   passport.serializeUser((user, done) => {
@@ -8,7 +8,7 @@ module.exports = (passport) => {
   });
 
   passport.deserializeUser((id, done) => {
-    queries.getUserById(id)
+    User.getUserById(id)
       .then(user => done(null, user))
       .catch(error => done(error, null));
   });
@@ -19,7 +19,7 @@ module.exports = (passport) => {
     callbackURL: config.google.callbackURL,
   },
   (req, accessToken, refreshToken, profile, done) => {
-    queries.getUserByOAuthID(profile.id)
+    User.getUserByOAuthID(profile.id)
       .then((user) => {
         if (user !== null) {
           done(null, user);
@@ -29,8 +29,8 @@ module.exports = (passport) => {
             name: profile.displayName,
           };
 
-          queries.addUser(newUser)
-            .then(id => queries.getUserById(id))
+          User.createUser(newUser)
+            .then(id => User.getUserById(id))
             .then(result => done(null, result))
             .catch(error => console.log(error));
         }

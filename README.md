@@ -11,9 +11,10 @@ First you need to install Docker from Docker's official [website](https://www.do
 Once Docker is installed run:
 
 * `docker-compose up` Build docker images and start Express and Postgres containers
-* `npm run db_up` Run migrations and seed data to local database
 
 Server runs at http://localhost:3000
+
+In order to persist data, `docker-compose.yml` volumes needs to be uncommented (not for development/testing)
 
 ## Authentication
 
@@ -29,3 +30,9 @@ module.exports = {
     callbackURL: `http://127.0.0.1:3000/auth/google/callback`,
   },
 };
+```
+
+## Testing
+
+* `npm run db_up` Run migrations and seed data to local database
+* `npm run test` Run actual tests
