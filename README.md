@@ -31,8 +31,3 @@ module.exports = {
   },
 };
 ```
-
-## Testing
-
-* `npm run db_up` Run migrations and seed data to local database
-* `npm run test` Run actual tests
