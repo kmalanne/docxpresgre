@@ -9,34 +9,36 @@ function parseId(id) {
 // Example
 const Example = {
   getAllExample() {
-    return knex(table)
-            .orderBy('id', 'asc')
-            .then(rows => Promise.resolve(rows));
+    return knex.select('*')
+      .from(table)
+      .orderBy('id', 'asc')
+      .then(rows => Promise.resolve(rows));
   },
 
   getExampleById(id) {
-    return knex(table)
-            .where('id', parseId(id))
-            .then(rows => Promise.resolve(rows));
+    return knex.select('*')
+      .from(table)
+      .where('id', parseId(id))
+      .then(rows => Promise.resolve(rows));
   },
 
   createExample(example) {
     return knex(table)
-            .insert(example, 'id')
-            .then(rows => Promise.resolve(rows));
+      .insert(example, 'id')
+      .then(rows => Promise.resolve(rows));
   },
 
   updateExample(id, updates) {
     return knex(table)
-            .where('id', parseId(id))
-            .update(updates)
-            .then(rows => Promise.resolve(rows));
+      .where('id', parseId(id))
+      .update(updates)
+      .then(rows => Promise.resolve(rows));
   },
 
   deleteExample(id) {
     return knex(table)
-            .where('id', parseId(id))
-            .del();
+      .where('id', parseId(id))
+      .del();
   },
 };
 

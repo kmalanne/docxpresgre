@@ -3,7 +3,7 @@ exports.seed = (knex, Promise) =>
     .then(() =>
       Promise.all([
         knex('app_user').insert({
-          oauth_id: 12345,
+          email: 'test@test.com',
           name: 'Testy McTestface',
         }),
       ]));
