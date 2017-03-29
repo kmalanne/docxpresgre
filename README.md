@@ -18,16 +18,9 @@ In order to persist data, `docker-compose.yml` volumes needs to be uncommented (
 
 ## Authentication
 
-Docxpresgre offers currently Google OAuth strategy for authenticating users. User must define Google authentication config to `/src/app/config/passport.js`.
-
-https://console.developers.google.com
+API uses JWT authentication with help of Auth0. To make authentication work create `.env` file with following values:
 
 ```
-module.exports = {
-  google: {
-    clientID: 'your_id',
-    clientSecret: 'your_secret',
-    callbackURL: `http://127.0.0.1:3000/auth/google/callback`,
-  },
-};
+AUTH0_CLIENT_ID=your_id
+AUTH0_CLIENT_SECRET=your_secret
 ```
