@@ -24,3 +24,8 @@ API uses JWT authentication with help of Auth0. To make authentication work crea
 AUTH0_CLIENT_ID=your_id
 AUTH0_CLIENT_SECRET=your_secret
 ```
+
+Client using API should use Auth0 lock for client side authentication.
+
+## Acknowledgements
+This project is a grateful recipient of the [Futurice Open Source sponsorship program](http://futurice.com/blog/sponsoring-free-time-open-source-activities).

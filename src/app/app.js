@@ -6,7 +6,7 @@ const dotenv = require('dotenv');
 
 const index = require('./routes/index');
 const example = require('./routes/example');
-const getToken = require('./routes/get_token');
+const token = require('./routes/token');
 const unavailable = require('./routes/unavailable');
 const error = require('./routes/error');
 
@@ -28,7 +28,7 @@ module.exports = () => {
 
   app.use('/', index);
   app.use('/example', example);
-  app.use('/get_token', getToken);
+  app.use('/token', token);
   app.use('/unavailable', authenticate, unavailable);
   app.use(error);
 

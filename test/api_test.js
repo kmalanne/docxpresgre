@@ -46,11 +46,32 @@ describe('API', () => {
   });
 
   describe('GET /unavailable', () => {
-    it('should return unauthorized', (done) => {
+    let token = null;
+
+    beforeEach((done) => {
+      chai.request(server)
+        .get('/token/1')
+        .end((err, res) => {
+          token = res.body;
+          done();
+        });
+    });
+
+    it('should return unauthorized with no token', (done) => {
       chai.request(server)
         .get('/unavailable')
         .end((err, res) => {
           res.should.have.status(401);
+          done();
+        });
+    });
+
+    it('should return authorized with token', (done) => {
+      chai.request(server)
+        .get('/unavailable')
+        .set('Authorization', `Bearer ${token}`)
+        .end((err, res) => {
+          res.should.have.status(200);
           done();
         });
     });
@@ -79,7 +100,7 @@ describe('API', () => {
         });
     });
 
-     it('should return bad request with invalid id', (done) => {
+    it('should return bad request with invalid id', (done) => {
       chai.request(server)
         .get('/example/scam')
         .end((err, res) => {
