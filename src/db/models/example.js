@@ -1,38 +1,35 @@
-const knex = require('../db.js');
+const knex = require('../db');
+const parseId = require('../utils/parseId');
 
 const table = 'example';
 
-function parseId(id) {
-  return parseInt(id, 10);
-}
-
 // Example
 const Example = {
-  getAllExample() {
-    return knex.select('*')
+  async getExamples() {
+    const rows = await knex.select('*')
       .from(table)
-      .orderBy('id', 'asc')
-      .then(rows => Promise.resolve(rows));
+      .orderBy('id', 'asc');
+    return rows;
   },
 
-  getExampleById(id) {
-    return knex.select('*')
+  async getExampleById(id) {
+    const rows = await knex.select('*')
       .from(table)
-      .where('id', parseId(id))
-      .then(rows => Promise.resolve(rows));
+      .where('id', parseId(id));
+    return rows;
   },
 
-  createExample(example) {
-    return knex(table)
-      .insert(example, 'id')
-      .then(rows => Promise.resolve(rows));
+  async createExample(example) {
+    const rows = await knex(table)
+      .insert(example, 'id');
+    return rows;
   },
 
-  updateExample(id, updates) {
-    return knex(table)
+  async updateExample(id, updates) {
+    const rows = await knex(table)
       .where('id', parseId(id))
-      .update(updates)
-      .then(rows => Promise.resolve(rows));
+      .update(updates);
+    return rows;
   },
 
   deleteExample(id) {

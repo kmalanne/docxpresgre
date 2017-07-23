@@ -20,137 +20,115 @@ describe('DB', () => {
   });
 
   describe('Example', () => {
-    it('should return all examples', (done) => {
-      Example.getAllExample()
-        .then(result => {
-          result.should.be.a('array');
-          result.length.should.equal(3);
-          result[1].should.be.a('object');
-          result[1].should.have.property('id');
-          result[1].should.have.property('column_1');
-          result[1].should.have.property('column_2');
-          done();
-        });
+    it('should return all examples', async () => {
+      const result = await Example.getExamples();
+      result.should.be.a('array');
+      result.length.should.equal(3);
+      result[1].should.be.a('object');
+      result[1].should.have.property('id');
+      result[1].should.have.property('column_1');
+      result[1].should.have.property('column_2');
     });
 
-    it('should return a single example with id', (done) => {
-      Example.getExampleById(1)
-        .then(result => {
-          result.should.be.a('array')
-          result.length.should.equal(1);
-          result[0].should.be.a('object');
-          result[0].should.have.property('id');
-          result[0].id.should.equal(1);
-          result[0].should.have.property('column_1');
-          result[0].column_1.should.equal('value1');
-          result[0].should.have.property('column_2');
-          result[0].column_2.should.equal(1);
-          done();
-        });
+    it('should return a single example with id', async () => {
+      const result = await Example.getExampleById(1);
+      result.should.be.a('array')
+      result.length.should.equal(1);
+      result[0].should.be.a('object');
+      result[0].should.have.property('id');
+      result[0].id.should.equal(1);
+      result[0].should.have.property('column_1');
+      result[0].column_1.should.equal('value1');
+      result[0].should.have.property('column_2');
+      result[0].column_2.should.equal(1);
     });
 
-    it('should add an example', (done) => {
+    it('should add an example', async () => {
       const newExample = {
+        id: 4,
         column_1: 'value4',
         column_2: 4,
       };
 
-      Example.createExample(newExample)
-        .then(id => Example.getExampleById(id))
-        .then(result => {
-          result.should.be.a('array')
-          result.length.should.equal(1);
-          result[0].should.be.a('object');
-          result[0].should.have.property('id');
-          result[0].id.should.equal(4);
-          result[0].should.have.property('column_1');
-          result[0].column_1.should.equal('value4');
-          result[0].should.have.property('column_2');
-          result[0].column_2.should.equal(4);
-          done();
-        });
+      const id = await Example.createExample(newExample);
+      const result = await Example.getExampleById(id);
+      result.should.be.a('array')
+      result.length.should.equal(1);
+      result[0].should.be.a('object');
+      result[0].should.have.property('id');
+      result[0].id.should.equal(4);
+      result[0].should.have.property('column_1');
+      result[0].column_1.should.equal('value4');
+      result[0].should.have.property('column_2');
+      result[0].column_2.should.equal(4);
     });
 
-    it('should update an example', (done) => {
+    it('should update an example', async () => {
       const update = {
         column_1: 'value5',
         column_2: 5,
       };
 
-      Example.updateExample(1, update)
-        .then(() => Example.getExampleById(1))
-        .then(result => {
-          result.should.be.a('array')
-          result.length.should.equal(1);
-          result[0].should.be.a('object');
-          result[0].should.have.property('id');
-          result[0].id.should.equal(1);
-          result[0].should.have.property('column_1');
-          result[0].column_1.should.equal('value5');
-          result[0].should.have.property('column_2');
-          result[0].column_2.should.equal(5);
-          done();
-        });
+      const id = await Example.updateExample(1, update);
+      const result = await Example.getExampleById(1);
+      result.should.be.a('array')
+      result.length.should.equal(1);
+      result[0].should.be.a('object');
+      result[0].should.have.property('id');
+      result[0].id.should.equal(1);
+      result[0].should.have.property('column_1');
+      result[0].column_1.should.equal('value5');
+      result[0].should.have.property('column_2');
+      result[0].column_2.should.equal(5);
     });
 
-    it('should delete a single example', (done) => {
-      Example.deleteExample(1)
-        .then(() => Example.getAllExample())
-        .then(result => {
-          result.should.be.a('array')
-          result.length.should.equal(2);
-          done();
-        });
+    it('should delete a single example', async () => {
+      await Example.deleteExample(1);
+      const result = await Example.getExamples();
+      result.should.be.a('array')
+      result.length.should.equal(2);
     });
   });
 
   describe('User', () => {
-    it('should return a single user with id', (done) => {
-      User.getUserById(1)
-        .then(result => {
-          result.should.be.a('array')
-          result.length.should.equal(1);
-          result[0].should.be.a('object');
-          result[0].should.have.property('name');
-          result[0].name.should.equal('Testy McTestface');
-          result[0].should.have.property('email');
-          result[0].email.should.equal('test@test.com');
-          done();
-        });
+    it('should return a single user with id', async () => {
+      const result = await User.getUserById(1);
+      result.should.be.a('array')
+      result.length.should.equal(1);
+      result[0].should.be.a('object');
+      result[0].should.have.property('name');
+      result[0].name.should.equal('Testy McTestface');
+      result[0].should.have.property('email');
+      result[0].email.should.equal('test@test.com');
     });
 
-    it('should return a single user with email', (done) => {
-      User.getUserByEmail('test@test.com')
-        .then(result => {
-          result.should.be.a('array')
-          result.length.should.equal(1);
-          result[0].should.be.a('object');
-          result[0].should.have.property('name');
-          result[0].name.should.equal('Testy McTestface');
-          result[0].should.have.property('email');
-          result[0].email.should.equal('test@test.com');
-          done();
-        });
+    it('should return a single user with email', async () => {
+      const result = await User.getUserByEmail('test@test.com');
+      result.should.be.a('array')
+      result.length.should.equal(1);
+      result[0].should.be.a('object');
+      result[0].should.have.property('name');
+      result[0].name.should.equal('Testy McTestface');
+      result[0].should.have.property('email');
+      result[0].email.should.equal('test@test.com');
     });
 
-    it('should add a user', (done) => {
+    it('should add a user', async () => {
       const newUser = {
+        id: 2,
         email: 'jorma@maansiirtofirma.fi',
         name: 'Jorma Teras',
       };
 
-      User.createUser(newUser)
-        .then(id => User.getUserById(id))
-        .then(result => {
-          result.should.be.a('array')
-          result.length.should.equal(1);
-          result[0].should.be.a('object');
-          result[0].should.have.property('name');
-          result[0].name.should.equal('Jorma Teras');
-          result[0].should.have.property('email');
-          result[0].email.should.equal('jorma@maansiirtofirma.fi');
-          done();
-        });
+      const id = await User.createUser(newUser);
+      const result = await User.getUserById(id);
+      result.should.be.a('array')
+      result.length.should.equal(1);
+      result[0].should.be.a('object');
+      result[0].should.have.property('name');
+      result[0].name.should.equal('Jorma Teras');
+      result[0].should.have.property('email');
+      result[0].email.should.equal('jorma@maansiirtofirma.fi');
     });
   });
 });

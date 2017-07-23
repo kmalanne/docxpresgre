@@ -1,4 +1,6 @@
 /* eslint-disable */
+'use strict';
+
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const server = require('../src/server').server;
@@ -115,6 +117,7 @@ describe('API', () => {
       chai.request(server)
         .post('/example')
         .send({
+          id: 4,
           column_1: 'value4',
           column_2: 4,
         })

@@ -2,39 +2,41 @@ const express = require('express');
 const validate = require('express-validation');
 const validations = require('./validations/example');
 const Example = require('../../db/models/example');
+const asyncRequest = require('../utils/asyncRequest');
 
 const router = express.Router();
 
-router.get('/', (req, res, next) => {
-  Example.getAllExample()
-    .then(result => res.status(200).json(result))
-    .catch(error => next(error));
-});
+const getExamples = async (req, res) => {
+  const result = await Example.getExamples();
+  res.status(200).json(result);
+};
 
-router.get('/:id', validate(validations.get), (req, res, next) => {
-  Example.getExampleById(req.params.id)
-    .then(result => res.status(200).json(result))
-    .catch(error => next(error));
-});
+const getExampleById = async (req, res) => {
+  const result = await Example.getExampleById(req.params.id);
+  res.status(200).json(result);
+};
 
-router.post('/', validate(validations.create), (req, res, next) => {
-  Example.createExample(req.body)
-    .then(id => Example.getExampleById(id))
-    .then(result => res.status(200).json(result))
-    .catch(error => next(error));
-});
+const createExample = async (req, res) => {
+  const id = await Example.createExample(req.body);
+  const result = await Example.getExampleById(id);
+  res.status(200).json(result);
+};
 
-router.put('/:id', validate(validations.update), (req, res, next) => {
-  Example.updateExample(req.params.id, req.body)
-    .then(() => Example.getExampleById(req.params.id))
-    .then(result => res.status(200).json(result))
-    .catch(error => next(error));
-});
+const updateExample = async (req, res) => {
+  await Example.updateExample(req.params.id, req.body);
+  const result = await Example.getExampleById(req.params.id);
+  res.status(200).json(result);
+};
 
-router.delete('/:id', validate(validations.delete), (req, res, next) => {
-  Example.deleteExample(req.params.id)
-    .then(result => res.status(200).json(result))
-    .catch(error => next(error));
-});
+const deleteExample = async (req, res) => {
+  const result = await Example.deleteExample(req.params.id);
+  res.status(200).json(result);
+};
+
+router.get('/', asyncRequest.bind(null, getExamples));
+router.get('/:id', validate(validations.get), asyncRequest.bind(null, getExampleById));
+router.post('/', validate(validations.create), asyncRequest.bind(null, createExample));
+router.put('/:id', validate(validations.update), asyncRequest.bind(null, updateExample));
+router.delete('/:id', validate(validations.delete), asyncRequest.bind(null, deleteExample));
 
 module.exports = router;
