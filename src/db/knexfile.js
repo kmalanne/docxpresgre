@@ -1,11 +1,14 @@
 const path = require('path');
 
-// Running migrations from CLI or Travis => localhost
-const host = process.env.NODE_ENV === 'test' ? '127.0.0.1' : 'postgres';
+const databaseUrl = process.env.NODE_ENV === 'test' ?
+  process.env.DATABASE_URL_TEST :
+  process.env.DATABASE_URL;
+
+const connection = `${databaseUrl}?charset=utf-8`;
 
 const dbConfiguration = {
   client: 'pg',
-  connection: `postgres://postgres:postgres@${host}:5432/postgres`,
+  connection,
   migrations: {
     directory: path.join(__dirname, '/migrations'),
   },

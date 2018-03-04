@@ -2,7 +2,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const jwt = require('express-jwt');
 const cors = require('cors');
-const dotenv = require('dotenv');
 
 const index = require('./routes/index');
 const example = require('./routes/example');
@@ -11,8 +10,6 @@ const unavailable = require('./routes/unavailable');
 const error = require('./routes/error');
 
 module.exports = () => {
-  dotenv.load();
-
   const app = express();
 
   app.use(bodyParser.urlencoded({
